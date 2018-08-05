@@ -68,7 +68,11 @@ class LocationCycler(object):
         self.cycle_paths(location_filepaths, forward=forward)
 
     def cycle_paths(self, paths, forward=True):
+        if not paths:
+            return
         curp = eval2py("expand('%:p')")
+        if curp is None:
+            curp = paths[-1]
         nextp = self._cycle_path(curp, paths, forward=forward)
         vim.command(r"edit {0}".format(nextp.rstrip()))
 

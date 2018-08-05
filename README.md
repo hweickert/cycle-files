@@ -1,5 +1,5 @@
 # Introduction
-`cycle-files` uses pre-defined lists of locations to quickly jump between files in VIM.
+`vim-cycle-files` uses pre-defined lists of locations to quickly jump between files in VIM.
 
 This is useful if you have several similar file structures (like git clones or forks)
 and you need to do comparisons between them.
@@ -31,6 +31,14 @@ let g:cycle_files_location_maps = [['/forkA', '/someDir/forkB', '/anotherDir/for
 
 By adding more sub-lists, you can define as many location maps as you like.
 
+# Cycling between specific files
+You can also jump between sets of specific files. In the example below the `|` and `\\` keys
+get assigned to jump between a set of configuration files.
+```
+    nmap <silent><bar>    :call CyclePaths(['~/.vimrc', '~/.gitconfig'])<cr>
+    nmap <silent><bslash> :call CyclePaths(['~/.vimrc', '~/.gitconfig'], 0)<cr>
+```
+
 # Requirements
 Your instance of VIM needs to be compiled with either `python` and/or `python3`.
 Check the output of the `:version` command to see if one is available.
@@ -38,13 +46,13 @@ Check the output of the `:version` command to see if one is available.
 # Installation
 ## Linux/MacOS
 ```
-git clone https://github.com/hweickert/cycle-files.git ~/.vim/pack/external/opt/cycle-files
+git clone https://github.com/hweickert/vim-cycle-files.git ~/.vim/pack/external/opt/vim-cycle-files
 ```
 
 In your `~/.vimrc` add the following.
 
 ```
-packadd cycle-files
+packadd vim-cycle-files
 
 nmap <a-up>   :call CycleFileLocNext()<cr>
 nmap <a-down> :call CycleFileLocPrevious()<cr>
@@ -52,13 +60,13 @@ nmap <a-down> :call CycleFileLocPrevious()<cr>
 
 ## Windows
 ```
-git clone https://github.com/hweickert/cycle-files.git ~/vimfiles/pack/external/opt/cycle-files
+git clone https://github.com/hweickert/vim-cycle-files.git %USERPROFILE%/vimfiles/pack/external/opt/vim-cycle-files
 ```
 
 In your `%USERPROFILE%/_vimrc` add the following
 
 ```
-packadd cycle-files
+packadd vim-cycle-files
 
 nmap <a-up>   :call CycleFileLocNext()<cr>
 nmap <a-down> :call CycleFileLocPrevious()<cr>

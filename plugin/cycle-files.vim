@@ -14,17 +14,34 @@ endpython
 endif
 
 
-function! CycleFileLocNext(...)
+function! s:validate_python()
     if s:py_mode is 0
         echo "Neither 'python' nor 'python3' are supported by this instance of VIM."
+        return 0
+    endif
+    return 1
+endfunction
+
+function! CyclePaths(paths, ...)
+    if !s:validate_python()
+        return
+    endif
+    let l:forward = 1
+    if len(a:000) > 1
+        let l:forward = a:0
+    endif
+    execute s:py_mode . 'cycle_files.location_cycler.LocationCycler().cycle_paths(cycle_files.location_cycler.eval2py('.string(a:paths).'), '.l:forward.')'
+endfunction
+
+function! CycleFileLocNext(...)
+    if !s:validate_python()
         return
     endif
     execute s:py_mode . 'cycle_files.location_cycler.LocationCycler().cycle_locations()'
 endfunction
 
 function! CycleFileLocPrevious(...)
-    if s:py_mode is 0
-        echo "Neither 'python' nor 'python3' are supported by this instance of VIM."
+    if !s:validate_python()
         return
     endif
     execute s:py_mode . 'cycle_files.location_cycler.LocationCycler().cycle_locations(False)'
