@@ -18,6 +18,10 @@ function! CycleFileLocPrevious(...)
     pyx cycle_files.location_cycler.LocationCycler().cycle_locations(False)'
 endfunction
 
+function! CycleFileSiblingNext()
+    pyx cycle_files.location_cycler.LocationCycler().cycle_paths(sorted(glob.glob('./*')), True)
+endfunction
 
-
-
+function! CycleFileSiblingPrevious()
+    pyx cycle_files.location_cycler.LocationCycler().cycle_paths(sorted(glob.glob('./*')), False)
+endfunction
